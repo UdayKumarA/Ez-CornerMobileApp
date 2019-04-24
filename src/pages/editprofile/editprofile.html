@@ -1,0 +1,88 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Edit Profile</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <div style="text-align:center;margin-top:10px;">
+        <img src="{{imgURL}}" class="img-circle-center"> <br />
+        <button ion-button clear (click)="changePhoto()">Change Photo</button>
+    </div>
+
+    <form [formGroup]="pwdChangeForm" (submit)="updateProfile()" novalidate>
+        <ion-item class="forgetPWD-borders">
+            <!-- <ion-icon name="custom-user-silhouette" item-start></ion-icon> -->
+            <ion-label stacked>User ID</ion-label>
+            <ion-input class="input-bottom-line" formControlName="UsrP_UserID" type="text" [(ngModel)]="storedUserID" disabled="true"></ion-input>
+        </ion-item> <br />
+
+        <ion-item class="forgetPWD-borders">
+            <!-- <ion-icon name="custom-key-tool" item-start></ion-icon> -->
+            <ion-label stacked>Employee ID</ion-label>
+            <ion-input class="input-bottom-line" formControlName="UsrP_EmployeeID" type="text" [(ngModel)]="storedEmpID" disabled="true"></ion-input>
+        </ion-item> <br />
+
+        <ion-item class="forgetPWD-borders">
+            <!-- <ion-icon name="custom-key-tool" item-start></ion-icon> -->
+            <ion-label stacked>Email ID</ion-label>
+            <ion-input class="input-bottom-line" formControlName="UsrP_EmailID" type="email" [(ngModel)]="storedEmail" disabled="true"></ion-input>
+        </ion-item> <br />
+
+        <ion-item class="forgetPWD-borders">
+            <ion-label stacked>Joining Date</ion-label>
+            <ion-input class="input-bottom-line" formControlName="UsrP_DOJ" type="text" [(ngModel)]="storedDOJ" disabled="true"></ion-input>
+        </ion-item> <br />
+
+        <ion-item class="forgetPWD-borders">
+            <!-- <ion-icon name="custom-key-tool" item-start></ion-icon> -->
+            <ion-label stacked>First name</ion-label>
+            <ion-input class="input-bottom-line" formControlName="UsrFstName" type="text" [(ngModel)]="storedFN" [class.invalid]="!pwdChangeForm.controls.UsrFstName.valid && pwdChangeForm.controls.UsrFstName.dirty"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!pwdChangeForm.controls.UsrFstName.valid && pwdChangeForm.controls.UsrFstName.dirty">
+            <p>Enter the First Name</p>
+        </ion-item> <br />
+
+        <ion-item class="forgetPWD-borders">
+            <!-- <ion-icon name="custom-key-tool" item-start></ion-icon> -->
+            <ion-label stacked>Last Name</ion-label>
+            <ion-input class="input-bottom-line" formControlName="UsrLstName" type="text" [(ngModel)]="storedLN" [class.invalid]="!pwdChangeForm.controls.UsrLstName.valid && pwdChangeForm.controls.UsrLstName.dirty"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!pwdChangeForm.controls.UsrLstName.valid && pwdChangeForm.controls.UsrLstName.dirty">
+            <p>Enter the Last Name</p>
+        </ion-item> <br />
+
+        <ion-item class="forgetPWD-borders">
+            <!-- <ion-icon name="custom-key-tool" item-start></ion-icon> -->
+            <ion-label stacked>Mobile Number</ion-label>
+            <ion-input class="input-bottom-line" formControlName="UsrP_MobNum" type="text" [(ngModel)]="UsrP_MobNum" minlength="10" maxlength="10"
+                required [class.invalid]="!pwdChangeForm.controls.UsrP_MobNum.valid && pwdChangeForm.controls.UsrP_MobNum.dirty"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!pwdChangeForm.controls.UsrP_MobNum.valid && pwdChangeForm.controls.UsrP_MobNum.dirty">
+            <p>Enter the Mobile Number</p>
+        </ion-item> <br />
+
+        <ion-item class="forgetPWD-borders">
+            <!-- <ion-icon name="custom-key-tool" item-start></ion-icon> -->
+            <ion-label stacked>Phone Number</ion-label>
+            <ion-input class="input-bottom-line" formControlName="UsrP_PhoneNumber" type="text" [(ngModel)]="UsrP_PhoneNumber" minlength="10"
+                maxlength="10" required [class.invalid]="!pwdChangeForm.controls.UsrP_PhoneNumber.valid && pwdChangeForm.controls.UsrP_PhoneNumber.dirty"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!pwdChangeForm.controls.UsrP_PhoneNumber.valid && pwdChangeForm.controls.UsrP_PhoneNumber.dirty">
+            <p>Enter the Phone Number</p>
+        </ion-item> <br />
+
+        <ion-item class="forgetPWD-borders">
+            <!-- <ion-icon name="custom-user-silhouette" item-start></ion-icon> -->
+            <ion-label stacked>Date Of Birth</ion-label>
+            <ion-datetime class="input-bottom-line" formControlName="UsrP_DOB" displayFormat="MM/DD/YYYY" [(ngModel)]="UsrP_DOB"></ion-datetime>
+        </ion-item> <br />
+
+        <button ion-button block color="commonColor" type="submit" [disabled]="pwdChangeForm.invalid">Update Profile</button>
+    </form>
+
+</ion-content>

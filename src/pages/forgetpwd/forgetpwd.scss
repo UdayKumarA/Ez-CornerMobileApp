@@ -1,0 +1,27 @@
+page-forgetpwd {
+
+    .boxes {
+        border: 1px solid #404a54;
+        box-shadow:1px 1px 1px 1px;
+    }
+    ion-icon {
+        &[class*="custom-"] {
+          mask-size: contain;
+          mask-position: 50% 50%;
+          mask-repeat: no-repeat;
+          background: currentColor;
+          width: 0.5em;
+          height: 0.5em;
+        }
+        &[class*="custom-key-tool"] {
+          mask-image: url(../assets/imgs/key-tool.svg);
+        }
+        &[class*="custom-user-silhouette"] {
+            mask-image: url(../assets/imgs/user-silhouette.svg);
+        }
+      }
+    .forgetPWD-borders {
+        border-radius: 25px;
+        background-color:#F5F3F2;
+    }
+}

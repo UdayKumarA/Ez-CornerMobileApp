@@ -1,0 +1,53 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title style="text-align: center">Evolutyz Corner</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list no-lines>
+      <img src="assets/imgs/evolutyzcorplogo.png" class="side-logo" style="margin-bottom: 15%;margin-top:15%">
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+      <!-- <ion-list id="sidenav" no-lines> -->
+        <!-- <ion-item (click)="usermenuHandler()">User Management</ion-item>
+        <ion-item-group submenu [class.visible]="showuserSubmenu" *ngFor="let p of usermenu" (click)="openPage(p)">
+          <ion-item submenu-item menuClose>{{p.title}}</ion-item>
+        </ion-item-group>
+        <ion-item (click)="rolemenuItemHandler()">Role Management</ion-item>
+        <ion-item-group submenu [class.visible]="showroleSubmenu" *ngFor="let p of rolemenu" (click)="openPage(p)">
+          <ion-item submenu-item menuClose>{{p.title}}</ion-item>
+        </ion-item-group>
+        <ion-item (click)="projectmenuItemHandler()">Project Management</ion-item>
+        <ion-item-group submenu [class.visible]="showprojectSubmenu" *ngFor="let p of projectmenu" (click)="openPage(p)">
+          <ion-item submenu-item menuClose>{{p.title}}</ion-item>
+        </ion-item-group> -->
+        <!-- <ion-item (click)="leavemenuItemHandler()">Leave Management</ion-item>
+        <ion-item-group submenu [class.visible]="showleaveSubmenu" *ngFor="let p of leavemenu" (click)="openPage(p)">
+          <ion-item submenu-item menuClose>{{p.title}}</ion-item>
+        </ion-item-group> -->
+        <!-- <ion-item (click)="appRejItemHandler()">Timesheet Management</ion-item>
+        <ion-item-group submenu [class.visible]="apprRejSubmenu" *ngFor="let p of appRejmenu" (click)="openPage(p)">
+          <ion-item submenu-item menuClose>{{p.title}}</ion-item>
+        </ion-item-group> -->
+      <!-- </ion-list> -->
+    </ion-list>
+  </ion-content>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-buttons>
+        <button ion-button style="color: #404a54" (click)="logout()">Logout</button>
+      </ion-buttons>
+      <ion-buttons right>
+        <button ion-button menuClose style="color: #404a54" (click)="editProfile()">Edit Profile</button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

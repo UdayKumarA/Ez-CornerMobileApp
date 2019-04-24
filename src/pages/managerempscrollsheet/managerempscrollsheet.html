@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Load TimeSheets</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+    <ion-list no-lines no-padding>
+        <ion-item>
+          <ion-grid style="background-color:#404a54;color:white">
+            <ion-row>
+              <ion-col col-4 style="text-align:left">Emp Name</ion-col>
+              <ion-col col-4 style="text-align:center">Date</ion-col>
+              <ion-col col-4 style="text-align:center">Actions</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item *ngFor="let item of items; let i = index">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-4 style="text-align: left;">{{item.Username}}</ion-col>
+              <ion-col col-4 style="text-align: center;">{{item.Month_Year}}</ion-col>
+                <ion-col col-4 style="text-align:center;">
+                  <ion-icon name="checkmark" style="color:green;border: 1px solid gray;width:20px;" (click)="approveforEmp(item.TimesheetID)"></ion-icon> &nbsp;
+                  <ion-icon name="close" style="color:red;border: 1px solid gray;width:20px;" (click)="rejectforEmp(item.TimesheetID)"></ion-icon> &nbsp;
+                  <ion-icon name="eye" style="color:#404a54;border: 1px solid gray;width:20px;" (click)="previewforEmp(item.TimesheetID,i)"></ion-icon>
+                </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" 
+        loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>

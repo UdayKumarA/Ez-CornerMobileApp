@@ -1,0 +1,54 @@
+<ion-header>
+
+	<ion-navbar>
+		<ion-title>
+			<span style="color:#404a54">Forget Password</span>
+		</ion-title>
+		<ion-buttons end>
+			<button ion-button (click)="closeModal()" style="margin-right:2px">
+				<ion-icon color="commonColor" name="close"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+	<div style="text-align:center;margin-top: 25%;margin-bottom: 15%">
+		<img src="assets/imgs/evolutyzcorplogo.png">
+	</div>
+	
+	<form [formGroup]="pwdChangeForm" (submit)="resetPassword()" novalidate>
+		<ion-item class="forgetPWD-borders">
+			<ion-icon name="custom-user-silhouette" item-start></ion-icon>
+			<ion-input formControlName="username" type="text" [(ngModel)]="username" placeholder="Enter your mail address"
+			 [class.invalid]="!pwdChangeForm.controls.username.valid && pwdChangeForm.controls.username.dirty"></ion-input>
+		</ion-item>
+		<ion-item class="error-message" *ngIf="!pwdChangeForm.controls.username.valid && pwdChangeForm.controls.username.dirty">
+			<p>UserName Required</p>
+		</ion-item> <br />
+		<!-- ========== -->
+		<ion-item class="forgetPWD-borders">
+			<ion-icon name="custom-key-tool" item-start></ion-icon>
+			<ion-input formControlName="oldPassword" type="password" [(ngModel)]="oldPassword" placeholder="Old Password"
+			 [class.invalid]="!pwdChangeForm.controls.oldPassword.valid && pwdChangeForm.controls.oldPassword.dirty"></ion-input>
+		</ion-item>
+		<ion-item class="error-message" *ngIf="!pwdChangeForm.controls.oldPassword.valid && pwdChangeForm.controls.oldPassword.dirty">
+			<p>Enter the Old Valid Password</p>
+		</ion-item> <br />
+		<!--============ -->
+		<ion-item class="forgetPWD-borders">
+			<ion-icon name="custom-key-tool" item-start></ion-icon>
+			<ion-input formControlName="newPassword" type="password" [(ngModel)]="newPassword" placeholder="Confirm Password"
+			[class.invalid]="!pwdChangeForm.controls.newPassword.valid && pwdChangeForm.controls.newPassword.dirty"></ion-input>
+		</ion-item>
+		<ion-item class="error-message" *ngIf="!pwdChangeForm.controls.newPassword.valid && pwdChangeForm.controls.newPassword.dirty">
+			<p>Enter the New valid Password</p>
+		</ion-item> <br />
+
+
+		<button ion-button block color="commonColor" type="submit" [disabled]="pwdChangeForm.invalid">Reset Password</button>
+	</form>
+
+</ion-content>

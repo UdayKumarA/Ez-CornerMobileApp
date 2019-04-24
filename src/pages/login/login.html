@@ -1,0 +1,32 @@
+<ion-content style="background-color:#f8f8f9;">
+	<img src="assets/imgs/appbck.png" style="width: 100%">
+
+	<div style="padding:4%">
+		<div style="text-align:center;margin-top: 1%; margin-bottom: 8%">
+			<img style="width: 250px;" src="assets/imgs/evolutyzcorplogo.png">
+		</div>
+
+		<form style="padding-top: 0%" [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+			<ion-item class="loginForm-borders">
+				<ion-icon style="color:#c0c1c2" name="custom-user" item-start></ion-icon>
+				<ion-input class="input-Class" formControlName="username" type="text" [(ngModel)]="username" placeholder="User ID"
+				 [class.invalid]="!loginForm.controls.username.valid && loginForm.controls.username.dirty"></ion-input>
+			</ion-item><br/>
+			<ion-item class="loginForm-borders">
+				<ion-icon style="color:#c0c1c2" name="custom-login" item-start></ion-icon>
+				<ion-input formControlName="password" type="password" [(ngModel)]="password" placeholder="Password" [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty"></ion-input>
+			</ion-item>
+			<br />
+			<button ion-button block style="background: linear-gradient(to right, #fcbf73 0%, #fee1b3 100%);" type="submit"
+			 [disabled]="loginForm.invalid">Login</button>
+			<button ion-button clear style="color:#fcbf73;" type="button" (click)="forgetPassword()">Forgot Password ?</button>
+		</form>
+	</div>
+
+</ion-content>
+
+<ion-footer>
+	<div style="text-align: center;color:#989797">
+		<p><b>Powered by Evolutyz IT Services @ 2019</b></p>
+	</div>
+</ion-footer>

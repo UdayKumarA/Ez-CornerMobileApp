@@ -1,0 +1,17 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Leave Calendar</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="bck-Color">
+
+  <ion-calendar (onDaySelect)="onDaySelect($event)"></ion-calendar>
+
+</ion-content>

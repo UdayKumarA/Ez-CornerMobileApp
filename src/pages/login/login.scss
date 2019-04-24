@@ -1,0 +1,27 @@
+page-login {
+  
+    ion-icon {
+        &[class*="custom-"] {
+          mask-size: contain;
+          mask-position: 50% 50%;
+          mask-repeat: no-repeat;
+          background: currentColor;
+          width: 0.5em;
+          height: 0.5em;
+        }
+        &[class*="custom-login"] {
+          mask-image: url(../assets/imgs/login.svg);
+        }
+        &[class*="custom-user"] {
+            mask-image: url(../assets/imgs/user.svg);
+        }
+      }
+      .loginForm-borders {
+        //border-radius: 25px;
+        background-color:#F9f9f9;
+        //border: 1px solid #ddd
+      }
+      .input-Class {
+        border-bottom: 0px;
+      }
+}

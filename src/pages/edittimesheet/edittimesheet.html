@@ -1,0 +1,75 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Edit Timesheets</ion-title>
+    <button ion-button style="float: right;color:white;background-color: #404a54" [disabled]="isSaveDisabled" (click)="update()">Save</button>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+                <p><b>Emp ID:</b> {{userID}}</p>
+            </ion-col>
+            <ion-col style="text-align: right">
+                <p>Project Name: {{projectName}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+                <p><b>Emp Name:</b> {{empName}}</p>
+            </ion-col>
+            <ion-col style="text-align: right">
+                <button ion-button style="float:right;height: 30px" color="commonColor" [disabled]="isSubmitDisabled" (click)="submit()">Submit</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-item>
+    <ion-item style="text-align: center;">
+      <b>{{monthData}}</b>, Time Sheet
+    </ion-item>
+
+    <ion-item>
+        <ion-grid style="background-color:#404a54;color:white">
+          <ion-row>
+            <ion-col col-2 style="text-align: left;">Date</ion-col>
+            <ion-col col-8 style="text-align: center">Task</ion-col>
+            <ion-col col-2 style="text-align:right">Hours</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+  <form [formGroup]="edittimesheetForm" novalidate>
+    <ion-list no-lines>
+      <ion-item nopadding *ngFor="let items of previewDataIndividualMonthDetails; let i=index">
+        <ion-grid>
+          <ion-row>
+          <ion-col col-4 style="text-align: left;">
+              <ion-item>{{items.TaskDate}}</ion-item>
+          </ion-col>
+          <ion-col col-6 >
+              <div style="text-align: center;">
+                  <ion-item no-lines>
+                    <ion-select interface="action-sheet" (ionChange)="taskSelected($event, i)" style="text-align:right;max-width: 110%">
+                      <ion-option *ngFor="let item of retrievedTasksList;let i=index" value={{item.TaskId}} [selected]="item.TaskId == items.Taskid" >{{item.TaskName}}</ion-option>
+                    </ion-select>
+                  </ion-item>
+              </div>
+            </ion-col> 
+            <ion-col col-2 style="text-align:right">
+              <ion-item style="padding:0px">
+                <ion-input formControlName="hoursValidationControl" type="tel" value={{items.NoofHoursWorked}} (ionBlur)="hoursSelected($event,i)"
+                minLength="1" maxLength="2" required [class.invalid]="!edittimesheetForm.controls.hoursValidationControl.valid && edittimesheetForm.controls.hoursValidationControl.dirty"></ion-input> 
+              </ion-item>
+              <span style="color:red" *ngIf="hoursValidationControl?.max > 24"></span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </form>
+
+</ion-content>

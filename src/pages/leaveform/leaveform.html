@@ -1,0 +1,56 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Leave Form</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()" style="margin-right:2px">
+        <ion-icon color="commonColor" name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="eventCreationForm" (submit)="applyLeave()" novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Employee ID</ion-label>
+        <ion-input type="text" disabled="true" formControlName="EmpID" [(ngModel)]="EmpID"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Employee Name</ion-label>
+        <ion-input type="text" disabled="true" formControlName="EmpName" [(ngModel)]="EmpName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>From</ion-label>
+        <ion-datetime formControlName="fromDate" displayFormat="DD/MM/YYYY" [(ngModel)]="fromDate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>End</ion-label>
+        <ion-datetime formControlName="toDate" displayFormat="DD/MM/YYYY" [(ngModel)]="toDate"></ion-datetime>
+      </ion-item>
+      <ion-grid>
+        <ion-row class="headergridClass">
+          <ion-col col-3 class="col-class">Leave <br /> Type</ion-col>
+          <ion-col col-3 class="col-class">Total <br /> Leaves</ion-col>
+          <ion-col col-3 class="col-class">Used <br /> Leaves</ion-col>
+          <ion-col col-3 class="col-class">Apply <br /> Leaves</ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngFor="let leavesCat of leaveCategoryGrid; let i = index">
+        <ion-row style="align-items: center;">
+          <ion-col col-3 class="col-class">{{leavesCat.leaveType}}</ion-col>
+          <ion-col col-3 class="col-class">{{leavesCat.totLeavesCount}}</ion-col>
+          <ion-col col-3 class="col-class">{{leavesCat.totHolidaysUsed}}</ion-col>
+          <ion-col col-3 style="border: 1px solid #404a54">
+            <ion-input class="balLeaveCSS" type="tel" maxLength="1" formControlName="No_Of_Days" (ionBlur)="leaveNumber($event,i)"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    <button ion-button block style="background: linear-gradient(to right, #fcbf73 0%, #fee1b3 100%); color:#000000" type="submit"
+      [disabled]="eventCreationForm.invalid">Apply Leave</button>
+  </form>
+
+</ion-content>

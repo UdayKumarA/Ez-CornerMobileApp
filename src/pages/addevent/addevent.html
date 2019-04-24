@@ -1,0 +1,59 @@
+<ion-header class="header">
+  <ion-navbar>
+    <ion-title>Add Event</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="bckColor">
+  <div class="addEventBorders">
+    <ion-segment class="segment-header" [(ngModel)]="addEventPage">
+      <ion-segment-button style="background-color:#3c617c;color: #FFFFFF;" role="button" value="applyleave"
+        aria-pressed="true">
+        Apply Leave &nbsp; <button ion-button clear class="segment-inner-button" (click)="addNewLeave()">
+          <ion-icon class="icon-color" name="add"></ion-icon>
+        </button>
+      </ion-segment-button>
+      <ion-segment-button style="background-color:#3c617c;color: #FFFFFF;" role="button" value="tmLeaves" aria-pressed="false">
+        Team Members Leaves
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="addEventPage">
+    <ion-list *ngSwitchCase="'applyleave'">
+      <ion-grid style="border-top:1px solid #fcbf73;background-color: #FFFFFF">
+        <ion-row>
+          <ion-col col-4 class="vertical-Line">Emp No <br /> Emp Name</ion-col>
+          <ion-col col-4 class="vertical-Line">Start Dt. <br /> Leave Dt.</ion-col>
+          <ion-col col-2 class="vertical-Line">No. of <br /> Leaves</ion-col>
+          <ion-col col-2 class="vertical-Line">Status</ion-col>
+        </ion-row>
+        <hr style="height:1px;background-color:green;width:100%;">
+        <ion-row *ngFor="let pls of personalLeaves; let i=index">
+          <ion-col col-4 class="plstyle" style="text-align: center;">{{pls.EmployeeID}} <br> {{pls.EmployeeName}}</ion-col>
+          <ion-col col-4 class="plstyle">{{pls.LeaveDate}} <br> {{pls.EndDate}}</ion-col>
+          <ion-col col-2 class="plstyle">{{pls.personalLeavesCount}}</ion-col>
+          <ion-col col-2 class="plstyle"></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    <ion-list *ngSwitchCase="'tmLeaves'">
+      <ion-grid style="border-top:1px solid #fcbf73;background-color: #FFFFFF">
+        <ion-row>
+          <ion-col col-4 class="vertical-Line">Emp No <br /> Emp Name</ion-col>
+          <ion-col col-4 class="vertical-Line">Start Dt. <br /> Leave Dt.</ion-col>
+          <ion-col col-2 class="vertical-Line">No. of <br /> Leaves</ion-col>
+          <ion-col col-2 class="vertical-Line">Status</ion-col>
+        </ion-row>
+        <hr style="height:1px;background-color:green;width:100%;">
+        <ion-row *ngFor="let tls of teamls; let i=index">
+          <ion-col col-4 class="plstyle" style="text-align: center;">{{tls.EmployeeID}} <br> {{tls.EmployeeName}}</ion-col>
+          <ion-col col-4 class="plstyle">{{tls.StartDate}} <br> {{tls.EndDate}}</ion-col>
+          <ion-col col-2 class="plstyle">{{tls.teamLeavesCount}}</ion-col>
+          <ion-col col-2 class="plstyle"></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </div>
+
+</ion-content>

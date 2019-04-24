@@ -1,0 +1,139 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title><img class="dash_logo" src="{{logoPathURI}}">
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bck-Color">
+  <!-- <img src="assets/imgs/appbck.png" style="width: 100%"> -->
+  <div style="text-align: center;">
+    <h1>Welcome {{empName}}</h1>
+    <p>The {{accountType}} Employee of Evolutyz Corp.</p>
+    <div>
+      <a class="twitter-timeline" href="https://twitter.com/evolutyz" data-width="350" data-height="250">
+        Tweets by @Evolutyz
+      </a>
+    </div>
+  </div>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pulling-text="drag down to refresh..." refreshingSpinner="bubbles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <!-- Manager -->
+  <div *ngIf="Roleid === 1007" style="padding:12px;">
+    <div style="text-align:center;">
+      <h4><b>Timesheets for Approval</b></h4>
+    </div>
+    <ion-list>
+      <ion-item>
+        <ion-grid style="background-color:#3c617c;color:#FFFFFF">
+          <ion-row>
+            <ion-col col-4 style="text-align:left">Emp Name</ion-col>
+            <ion-col col-3 style="text-align:center">Date</ion-col>
+            <ion-col col-5 style="text-align:center">Actions</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item *ngFor="let item of approvalItems; let i = index">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4 style="text-align: left;">{{item.Username}}</ion-col>
+            <ion-col col-3 style="text-align: center;">{{item.Month_Year}}</ion-col>
+            <ion-col col-5 style="text-align:center;">
+              <button ion-button clear class="actionButtons" (click)="approveforEmp(item.TimesheetID)">
+                <ion-icon name="checkmark" style="color:green;border: 1px solid gray;width:20px;"></ion-icon>
+              </button> &nbsp;
+              <button ion-button clear class="actionButtons" (click)="rejectforEmp(item.TimesheetID)">
+                <ion-icon name="close" style="color:red;border: 1px solid gray;width:20px;"></ion-icon>
+              </button> &nbsp;
+              <button ion-button clear class="actionButtons" (click)="previewforEmp(item.Month_Year,item.TimesheetID,item.Username,item.Userid)">
+                <ion-icon name="eye" style="color:#404a54;border: 1px solid gray;width:20px;"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item style="text-align: center">
+        <button ion-button style="float:right;margin-right:15px;" color="commonColor" (click)="loadMore()">Load More
+          &nbsp; <ion-icon name="arrow-forward"></ion-icon></button>
+      </ion-item>
+      <!-- <button ion-button full color="commonColor" (click)="viewTimesheet()">View Timesheet</button> -->
+    </ion-list>
+
+  </div>
+  <!-- User -->
+  <div *ngIf="Roleid === 1021" style="padding:12px;">
+    <ion-item>
+      <ion-grid style="background-color:#3c617c;color:#FFFFFF">
+        <ion-row>
+          <ion-col col-3 style="text-align: left;">Date </ion-col>
+          <ion-col col-3 style="text-align: center;">Billed<br> Hours</ion-col>
+          <ion-col col-3 style="text-align: center;">Actual <br>Hours </ion-col>
+          <ion-col col-3 style="text-align: center">Actions</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item *ngFor="let item of personalItems; let i = index">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3 style="text-align: left;">{{item.Month_Year}} </ion-col>
+          <ion-col col-3 style="text-align:center;">{{item.ResourceWorkingHours}}</ion-col>
+          <ion-col col-3 style="text-align:center;">{{item.CompanyBillingHours}}</ion-col>
+          <ion-col col-3 style="text-align:center">
+            <button ion-button class="actionButtons" clear>
+              <ion-icon class="icon-shape" [style.background-color]="getColor(item.TimesheetStatus)"></ion-icon>
+            </button> &nbsp;
+            <button ion-button class="actionButtons" clear [disabled]="!item.isEditValid" (click)="edit(item.Month_Year,item.CompanyBillingHours,item.TimesheetID, i)">
+              <ion-icon name="create" style="color:#404a54;border: 1px solid black"></ion-icon>
+            </button> &nbsp;
+            <button ion-button class="actionButtons" clear (click)="preview(item.Month_Year,item.CompanyBillingHours)">
+              <ion-icon name="eye" style="color:#404a54;border: 1px solid black"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item style="text-align: center" no-lines>
+      <button ion-button (click)="toggleStatus()" style="float:left;background-color:#3c617c;color:#FFFFFF">Status
+        {{buttonName}}</button>
+      <button ion-button style="float:right;background-color:#3c617c;color:#FFFFFF" (click)="viewTimesheet()"> More
+        &nbsp; <ion-icon name="arrow-forward"></ion-icon></button>
+    </ion-item>
+  </div>
+  <div *ngIf="show" style="padding:12px;margin-top: -22px;">
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-2>
+            <ion-icon class="icon-shape" style="background-color:#FFFF00" (click)="popYellowControl($myYellowEvent)"></ion-icon>
+          </ion-col>
+          <ion-col col-2>
+            <ion-icon class="icon-shape" style="background-color:#228B22" (click)="popGreenControl($myGreenEvent)"></ion-icon>
+          </ion-col>
+          <ion-col col-2>
+            <ion-icon class="icon-shape" style="background-color:#FF6347" (click)="popRedControl($myRedEvent)"></ion-icon>
+          </ion-col>
+          <ion-col col-2>
+            <ion-icon class="icon-shape" style="background-color:#FFDAB9" (click)="popPeachControl($myPeachEvent)"></ion-icon>
+          </ion-col>
+          <ion-col col-2>
+            <ion-icon class="icon-shape" style="background-color:#FFA500" (click)="popOrangeControl($myOrangeEvent)"></ion-icon>
+          </ion-col>
+          <ion-col col-2>
+            <ion-icon class="icon-shape" style="background-color:#8A2BE2" (click)="popBlueControl($myBlueEvent)"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </div>
+
+  <div hidden>
+    <ngx-twitter-timeline [data]="{sourceType: 'url', url: 'https://twitter.com/evolutyz'}" [opts]="{tweetLimit: 2}"></ngx-twitter-timeline>
+  </div>
+
+</ion-content>

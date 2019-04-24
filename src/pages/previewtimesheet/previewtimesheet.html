@@ -1,0 +1,55 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Preview Timesheet</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+                <p><b>Emp ID:</b> {{userID}}</p>
+            </ion-col>
+            <ion-col style="text-align: right; ">
+                <p><b>Project Name: </b> {{projectName}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            
+            <ion-col style="text-align: left; ">
+                <p><b>Total Hours: </b>{{monthHours}}</p>
+            </ion-col>
+            <ion-col style="text-align: right; ">
+              <p><b>Emp Name:</b> {{empName}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-item>
+
+    <ion-list>
+      <ion-item style="background-color:#404a54;color:whitesmoke;height:7px;">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4 style="text-align: center; padding-right: 25px">Date</ion-col>
+            <ion-col col-4 style="text-align: center;">Task Type</ion-col>
+            <ion-col col-4 style="text-align: center;">Hours</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item *ngFor="let item of previewIndividualMonth; let i = index">
+        <ion-grid>
+          <ion-row style="white-space: pre-wrap;">
+            <ion-col col-4 style="text-align-last: justify;word-spacing: 5px;padding-right: 30px;">{{item.TaskDate}}</ion-col>
+            <ion-col col-4 style="text-align: center;">{{item.Taskname}}</ion-col>
+            <ion-col col-4 style="text-align: center;">{{item.NoofHoursWorked}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+</ion-content>

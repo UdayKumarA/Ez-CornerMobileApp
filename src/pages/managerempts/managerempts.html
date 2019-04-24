@@ -1,0 +1,57 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title style="text-align: left;">{{nameOfEmp}}'s Timesheet</ion-title>
+
+      <div style="text-align:right;">
+          <button ion-button clear style="color:green;" (click)="approve()"><ion-icon name="checkmark"></ion-icon></button>
+          <button ion-button clear style="color:red" (click)="reject()"><ion-icon name="close"></ion-icon></button>
+      </div>
+      
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <!-- <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <p><b>Emp ID:</b> {{empUserID}}</p>
+            </ion-col>
+            <ion-col style="text-align: right">
+              <p><b>Worked Hours: </b>{{totalHours}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p><b>Emp Name:</b> {{nameOfEmp}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-item> -->
+
+    <ion-list>
+      <ion-item style="background-color:#404a54;color:whitesmoke;height:7px;">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4 style="text-align: left;">Date</ion-col>
+            <ion-col col-4 style="text-align: center;">Task Type</ion-col>
+            <ion-col col-4 style="text-align: right;">Hours</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item *ngFor="let item of monthlyDetails; let i = index">
+        <ion-grid>
+          <ion-row style="white-space: pre-wrap;">
+            <ion-col col-4 style="text-align: left;">{{item.TaskDate}}</ion-col>
+            <ion-col col-4 style="text-align: center;">{{item.Taskname}}</ion-col>
+            <ion-col col-4 style="text-align: right;">{{item.NoofHoursWorked}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+</ion-content>

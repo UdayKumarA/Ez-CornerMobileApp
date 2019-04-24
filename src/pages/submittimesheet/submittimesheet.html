@@ -1,0 +1,92 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Evolutyz Corp</ion-title>
+    <button ion-button style="float:right;" color="commonColor" [disabled]="isSubmitDisabled" (click)="submit()">submit</button>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content no-lines>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <p><b>Emp ID:</b> {{capturedUserID}}</p>
+        </ion-col>
+        <ion-col style="text-align: right">
+          <p>Project Name: {{capturedProjectName}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <p><b>Emp Name:</b> {{capturedUserName}}</p>
+        </ion-col>
+        <ion-col style="text-align: right">
+          <button ion-button style="float:right;height: 30px" color="commonColor" [disabled]="isSaveDisabled" (click)="save()">Save</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <ion-item no-lines>
+    <ion-label>Select Month</ion-label>
+    <ion-select (ionChange)="monthSelected($event)">
+      <ion-option *ngFor="let m of printDropdownMonthArray" value={{m.monthNamesList}} [selected]="m.currentMonth">{{m.monthNamesList}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Select Year</ion-label>
+    <ion-datetime displayFormat="YYYY" min="2017" max="2030" [(ngModel)]="selectedYear" (ngModelChange)="yearSelected($event)"></ion-datetime>
+  </ion-item>
+
+  <ion-item style="text-align: center">
+    <ion-label><b>{{namesofMonth}}</b>, {{selectedYear}} Monthly TimeSheet </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-grid style="background-color:#404a54;color:white">
+      <ion-row>
+        <ion-col col-3 style="text-align: left;">Date</ion-col>
+        <ion-col col-7 style="text-align: center">Task</ion-col>
+        <ion-col col-2 style="text-align:right">Hours</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <form [formGroup]="submitSheet" novalidate>
+    <ion-list no-lines>
+      <ion-item no-padding *ngFor="let dates of namesofallDays.dayOfWeek; let i=index">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4 style="text-align: left;" no-padding>
+              <ion-item>{{dates}}</ion-item>
+            </ion-col>
+            <ion-col col-6 no-padding>
+              <div style="margin-left:2px;text-align: center;">
+                <ion-item no-lines>
+                  <ion-select interface="action-sheet" (ionChange)="taskSelected($event, i)" style="text-align:right;max-width: 110%">
+                    <ion-option *ngFor="let item of retrievedTasksList;let i=index" value={{item.TaskId}} [selected]="item.TaskId == capturedTaskID">{{item.TaskName}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </div> 
+            </ion-col>
+            <ion-col col-2 style="text-align:right" no-padding>
+              <ion-item no-lines>
+                <ion-input formControlName="hoursValidationControl" type="tel" value={{namesofallDays.buildingJsonData[i].hoursWorked}}
+                  (ionBlur)="hoursSelected($event,i)" minLength="1" maxLength="2" required [class.invalid]="!submitSheet.controls.hoursValidationControl.valid && submitSheet.controls.hoursValidationControl.dirty">
+                </ion-input>
+                <span style="color:red" *ngIf="hoursValidationControl?.max > 24"></span>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </form>
+
+</ion-content>
